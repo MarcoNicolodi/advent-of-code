@@ -40,11 +40,20 @@
   [(binary-search row-directions rows)
    (binary-search column-directions seats)])
 
-(defn find-greatest-seat-code [path]
+(defn flight-seat-ids [path]
   (->> path
        wire->row+column+paths
-       (map (comp seat-id find-row+seat))
-       (apply max)))
+       (map (comp seat-id find-row+seat))))
+
+(defn find-greatest-seat-code [seat-ids]
+  (apply max seat-ids))
+
+(defn find-missing-seat-id
+  [seat-ids]
+  (let [sorted-ids (set (sort seat-ids))
+        all-seat-ids (set (range (apply min sorted-ids) (inc (apply max sorted-ids))))]
+    (clojure.set/difference all-seat-ids sorted-ids)))
 
 (comment
-  (find-greatest-seat-code path))
+  (let [seat-ids (flight-seat-ids path)]
+    ((juxt find-greatest-seat-code find-missing-seat-id) seat-ids)))
