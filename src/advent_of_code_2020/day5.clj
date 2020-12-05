@@ -45,3 +45,6 @@
        wire->row+column+paths
        (map (comp seat-id find-row+seat))
        (apply max)))
+
+(comment
+  (find-greatest-seat-code path))
