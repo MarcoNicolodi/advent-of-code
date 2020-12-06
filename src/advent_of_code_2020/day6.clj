@@ -1,5 +1,6 @@
 (ns advent-of-code-2020.day6
-  (:require [clojure.string :as str]))
+  (:require [clojure.string :as str]
+            [clojure.set :as set]))
 
 (def path "./resources/day6-input")
 
@@ -12,3 +13,19 @@
                       #(str/replace % "\n" "")))
            (reduce +))))
 
+(defn wire->group-personal-responses [path]
+  (-> path
+      slurp
+      (str/split #"\n\n")
+      (->> (map #(str/split % #"\n")))))
+
+(defn questions-everyone-answered [group-response]
+  (->> group-response
+       (map set)
+       (apply set/intersection)))
+
+(defn part2 [path]
+  (->> path
+      wire->group-personal-responses
+      (map (comp count questions-everyone-answered))
+      (reduce +)))
