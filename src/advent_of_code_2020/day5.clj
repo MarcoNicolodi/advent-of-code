@@ -5,7 +5,7 @@
 (def rows 127)
 (def seats 7)
 
-(defn line->row+column-paths [line]
+(defn line->row+column-directions [line]
   (partition-all 7 line))
 
 (defn row+column-paths->binary-search-directions
@@ -16,12 +16,12 @@
     [(map row-ops row)
      (map column-ops column)]))
 
-(defn wire->row+column+paths [path]
+(defn wire->rows+columns+directions [path]
   (->> path
        slurp
        str/split-lines
        (map (comp row+column-paths->binary-search-directions
-                  line->row+column-paths))))
+                  line->row+column-directions))))
 
 (defn binary-search [directions num]
   (loop [[direction & rest] directions
@@ -42,10 +42,10 @@
 
 (defn flight-seat-ids [path]
   (->> path
-       wire->row+column+paths
+       wire->rows+columns+directions
        (map (comp seat-id find-row+seat))))
 
-(defn find-greatest-seat-code [seat-ids]
+(defn find-greatest-seat-id [seat-ids]
   (apply max seat-ids))
 
 (defn find-missing-seat-id
@@ -56,4 +56,4 @@
 
 (comment
   (let [seat-ids (flight-seat-ids path)]
-    ((juxt find-greatest-seat-code find-missing-seat-id) seat-ids)))
+    ((juxt find-greatest-seat-id find-missing-seat-id) seat-ids)))
