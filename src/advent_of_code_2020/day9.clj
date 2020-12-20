@@ -27,5 +27,25 @@
         (recur (inc i))
         subject))))
 
-(def part1 []
+(defn part1 []
   (find-invalid (wire->internal path) preamble))
+
+(defn contiguous-set-that-sums-to [nums value]
+  (loop [i 0]
+    (or (reduce (fn [contiguous-set x]
+               (let [sum (apply + contiguous-set)]
+                 (if (> sum value)
+                   (reduced false)
+                   (if (= value (+ sum x))
+                     (reduced (conj contiguous-set x))
+                     (conj contiguous-set x)))))
+             []
+             (drop i nums))
+        (recur (inc i)))))
+
+(defn part-2 []
+  (let [in (wire->internal path)
+        min-and-max (juxt (partial apply min) (partial apply max))
+        contiguous-set (contiguous-set-that-sums-to in (find-invalid in preamble))]
+    (apply + (min-and-max contiguous-set))))
+
