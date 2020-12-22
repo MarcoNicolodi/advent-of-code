@@ -21,3 +21,14 @@
   (* (count (get diffs 3)) (count (get diffs 1))))
 
 (def part1 (comp *-3s-and-1s-counts diffs with-build-in-adapter-joltage with-charging-outlet-joltage sorted-vec wire->internal))
+
+;;TODO fix this
+(defn connection-possibilities [ins]
+  (map count
+       (for [i (range 0 (count ins))]
+         (let [[head & tail] (drop i ins)]
+           (take-while #(<= (- % head) 3) tail)))))
+
+(defn part2 [ins]
+  (apply * (filter (partial pos-int?)
+                   (connection-possibilities ins))))
