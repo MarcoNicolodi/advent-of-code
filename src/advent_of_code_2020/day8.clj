@@ -2,7 +2,7 @@
   (:require [clojure.string :as str]
             [clojure.set :as set]))
 
-(def path "./resources/day8-input")
+(def path "./resources/2020/day8-input")
 
 (def wire-op->internal->op
   {"acc" :accumulate

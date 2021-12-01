@@ -2,7 +2,7 @@
   (:require [clojure.string :as str]
             [clojure.set :as set]))
 
-(def path "./resources/day4-input")
+(def path "./resources/2020/day4-input")
 
 (def required-data
   #{"byr" "iyr" "eyr" "hgt" "hcl" "ecl" "pid"})

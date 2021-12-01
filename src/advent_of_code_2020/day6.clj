@@ -2,7 +2,7 @@
   (:require [clojure.string :as str]
             [clojure.set :as set]))
 
-(def path "./resources/day6-input")
+(def path "./resources/2020/day6-input")
 
 (defn part1 [path]
   (-> path

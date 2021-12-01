@@ -1,7 +1,7 @@
 (ns advent-of-code-2020.day10
   (:require [clojure.string :as str]))
 
-(def path "./resources/day10-input")
+(def path "./resources/2020/day10-input")
 
 (defn wire->internal [path]
   (->> path slurp str/split-lines (map #(Integer/parseInt %))))
