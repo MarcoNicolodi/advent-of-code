@@ -1,4 +1,4 @@
-(ns advent-of-code.day5
+(ns advent-of-code.2020.day5
   (:require [clojure.string :as str]))
 
 (def path "./resources/2020/day5-input")

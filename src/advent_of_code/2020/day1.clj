@@ -1,4 +1,4 @@
-(ns advent-of-code.day1)
+(ns advent-of-code.2020.day1)
 
 (def input
   (->> (slurp "./resources/2020/day1-input")
