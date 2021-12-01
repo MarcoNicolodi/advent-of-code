@@ -1,7 +1,7 @@
-(ns advent-of-code-2020.day5
+(ns advent-of-code.day5
   (:require [clojure.string :as str]))
 
-(def path "./resources/day5-input")
+(def path "./resources/2020/day5-input")
 (def rows 127)
 (def seats 7)
 

@@ -1,7 +1,7 @@
-(ns advent-of-code-2020.day3
+(ns advent-of-code.day3
   (:require [clojure.string :as str]))
 
-(def path "./resources/day3-input")
+(def path "./resources/2020/day3-input")
 
 (defn wire-vec->map [map-vec]
   {:path map-vec

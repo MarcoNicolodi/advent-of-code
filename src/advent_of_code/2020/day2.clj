@@ -1,8 +1,8 @@
-(ns advent-of-code-2020.day2
+(ns advent-of-code.day2
   (:require [clojure.string :as str]))
 
 ;;part 1
-(def path "./resources/day2-input")
+(def path "./resources/2020/day2-input")
 
 (defn wire->policy+password [path]
   (->> path

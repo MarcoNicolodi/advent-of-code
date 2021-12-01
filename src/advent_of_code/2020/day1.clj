@@ -1,7 +1,7 @@
-(ns advent-of-code-2020.day1)
+(ns advent-of-code.day1)
 
 (def input
-  (->> (slurp "./resources/day1-input")
+  (->> (slurp "./resources/2020/day1-input")
        (clojure.string/split-lines)
        (map #(Integer/parseInt %))))
 

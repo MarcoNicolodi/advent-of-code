@@ -1,7 +1,7 @@
-(ns advent-of-code-2020.day9
+(ns advent-of-code.day9
   (:require [clojure.string :as str]))
 
-(def path "./resources/day9-input")
+(def path "./resources/2020/day9-input")
 (def preamble 25)
 
 (defn wire->internal [path]
