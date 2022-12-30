@@ -23,3 +23,11 @@
                   (partial apply set/intersection)
                   input->compartment-items))
        (reduce +)))
+
+(def part-2
+  (->> input
+       (partition 3)
+       (mapcat (comp (partial apply set/intersection)
+                     (partial map set)))
+       (map item->priority)
+       (reduce +)))
