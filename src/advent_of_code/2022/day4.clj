@@ -15,7 +15,7 @@
   [lines]
   (map line->assignment-pair lines))
 
-(defn fully-contains?
+(defn fully-overlaps?
   [assignment-pair]
   (let [start [(ffirst assignment-pair) (first (second assignment-pair))]
         end   [(second (first assignment-pair)) (second (second assignment-pair))]]
@@ -24,8 +24,23 @@
         (and (<= (second start) (first start))
              (>= (second end)   (first end))))))
 
+(defn any-overlap?
+  [assignment-pair]
+  (let [start [(ffirst assignment-pair) (first (second assignment-pair))]
+        end   [(second (first assignment-pair)) (second (second assignment-pair))]]
+    (or (and (<= (first start) (second start))
+             (>= (first end) (second start)))
+        (and (<= (second start) (first start))
+             (>= (second end) (first start))))))
+
 (def part-1
   (->> input
        lines->assignment-pairs
-       (filter fully-contains?)
+       (filter fully-overlaps?)
+       count))
+
+(def part-2
+  (->> input
+       lines->assignment-pairs
+       (filter any-overlap?)
        count))
