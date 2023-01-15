@@ -52,7 +52,7 @@
 
 (defn parse-command
   [line]
-  (let [[_ amount origin target] (re-matches #".*(\d).*(\d).*(\d)" line)]
+  (let [[_ amount origin target] (re-matches #"\D*(\d+)\D*(\d)\D*(\d)" line)]
     {:amount (parse-long amount) :origin (parse-long origin) :target (parse-long target)}))
 
 (defn parse-commands
@@ -61,15 +61,12 @@
         command-lines (drop (dec command-start-line) input)]
     (mapv parse-command command-lines)))
 
-
 ;; run commands
 (defn run-command
   [command stacks]
-  (println stacks)
   (loop [i (:amount command)
          stacks stacks]
-    (println i)
-    (if (= 0 i)
+    (if (= i 0)
       stacks
       (let [{:keys [origin target]} command
             origin-stack (get stacks origin)
@@ -86,7 +83,6 @@
         commands (parse-commands input)]
     (loop [stacks stacks
            [command & commands] commands]
-      (println command)
       (if-not command
         stacks
         (recur (run-command command stacks) commands)))))
