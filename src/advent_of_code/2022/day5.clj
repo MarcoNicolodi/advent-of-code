@@ -77,6 +77,16 @@
             new-stacks (assoc stacks origin new-origin-stack target new-target-stack)]
         (recur (dec i) new-stacks)))))
 
+(defn run-command-2
+  [{:keys [amount origin target]} stacks]
+  (let [origin-stack (get stacks origin)
+        target-stack (get stacks target)
+        crates (take amount origin-stack)
+        new-origin-stack (drop amount origin-stack)
+        new-target-stack (concat crates target-stack)
+        new-stacks (assoc stacks origin new-origin-stack target new-target-stack)]
+    new-stacks))
+
 (defn part-1
   [input]
   (let [stacks (parse-stacks input)
@@ -86,3 +96,13 @@
       (if-not command
         stacks
         (recur (run-command command stacks) commands)))))
+
+(defn part-2
+  [input]
+  (let [stacks (parse-stacks input)
+        commands (parse-commands input)]
+    (loop [stacks stacks
+           [command & commands] commands]
+      (if-not command
+        stacks
+        (recur (run-command-2 command stacks) commands)))))
