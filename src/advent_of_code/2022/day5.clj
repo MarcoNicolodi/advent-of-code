@@ -87,22 +87,15 @@
         new-stacks (assoc stacks origin new-origin-stack target new-target-stack)]
     new-stacks))
 
-(defn part-1
-  [input]
+(defn solver
+  [run-command-fn input]
   (let [stacks (parse-stacks input)
         commands (parse-commands input)]
     (loop [stacks stacks
            [command & commands] commands]
       (if-not command
         stacks
-        (recur (run-command command stacks) commands)))))
+        (recur (run-command-fn command stacks) commands)))))
 
-(defn part-2
-  [input]
-  (let [stacks (parse-stacks input)
-        commands (parse-commands input)]
-    (loop [stacks stacks
-           [command & commands] commands]
-      (if-not command
-        stacks
-        (recur (run-command-2 command stacks) commands)))))
+(def part-1-solver (partial solver run-command))
+(def part-2-solver (partial solver run-command-2))
