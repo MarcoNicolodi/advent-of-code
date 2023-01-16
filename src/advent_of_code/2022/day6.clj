@@ -13,4 +13,4 @@
                (inc cursor-position))))))
 
 (def part-1 (runner 4))
-(def part-1 (runner 14))
+(def part-2 (runner 14))
